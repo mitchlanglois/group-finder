@@ -1,9 +1,8 @@
 import { withRouter } from 'next/router'
 import Markdown from 'react-markdown'
-import Layout from '../components/Layout'
 
 export default withRouter((props) => (
-  <Layout>
+  <div>
     <h1>{props.router.query.title}</h1>
     <div className="markdown">
       <Markdown source={`
@@ -34,5 +33,5 @@ export default withRouter((props) => (
         text-transform: uppercase;
       }
     `}</style>
-  </Layout>
+  </div>
 ))

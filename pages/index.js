@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Layout from '../components/Layout'
 
 const getPosts = () => {
   return [
@@ -12,7 +11,7 @@ const getPosts = () => {
 const PostLink = ({ post }) => (
   <li>
     <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-      <a>{ post.title }</a>
+      <a>{post.title}</a>
     </Link>
     <style jsx>{`
       li {
@@ -34,7 +33,7 @@ const PostLink = ({ post }) => (
 )
 
 export default () => (
-  <Layout>
+  <div>
     <h1>Sample Blog</h1>
     <ul>
       {getPosts().map((post) => (
@@ -50,5 +49,5 @@ export default () => (
         padding: 0;
       }
     `}</style>
-  </Layout>
+  </div>
 )
