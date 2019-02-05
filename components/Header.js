@@ -18,6 +18,9 @@ const HeaderContainer = styled.div`
   a {
     text-decoration: none;
     color: ${props => props.theme.darkGrey};
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0px 5px;
   }
 `;
 
@@ -25,9 +28,7 @@ const Logo = styled.span`
   font-size: 2rem;
   margin-right: 16px;
   a {
-    color: ${props => props.theme.darkGrey};
-    text-transform: uppercase;
-    text-decoration: none;
+    padding: 0;
   }
 `;
 
@@ -40,6 +41,9 @@ const Header = () => (
     </Logo>
     <Link href="/about">
       <a>About</a>
+    </Link>
+    <Link href="/signup">
+      <a>Signup</a>
     </Link>
   </HeaderContainer>
 )
