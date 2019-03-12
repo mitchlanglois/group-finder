@@ -3,6 +3,8 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import styled from 'styled-components'
 
+import User from './User'
+
 Router.onRouteChangeStart = () => {
   NProgress.start();
 }
@@ -45,6 +47,12 @@ const Header = () => (
     <Link href="/signup">
       <a>Signup</a>
     </Link>
+    <User>
+      {({ data: { me } }) => {
+        if (me) return <p>{me.name}</p>
+        return null
+      }}
+    </User>
   </HeaderContainer>
 )
 
