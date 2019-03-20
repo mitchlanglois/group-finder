@@ -36,6 +36,19 @@ const Logo = styled.span`
   }
 `;
 
+const MenuItems = styled.div`
+  float: right;
+`;
+
+const MenuItem = styled.div`
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    color: #666;
+  }
+`;
+
 const Header = () => (
   <User>
     {({ data: { me } }) => (
@@ -45,12 +58,15 @@ const Header = () => (
             <a>Group Finder</a>
           </Link>
         </Logo>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-        {me &&
-          <Logout />
-        }
+        <MenuItems>
+          <MenuItem>
+            {me &&
+              <Logout>
+                Logout
+            </Logout>
+            }
+          </MenuItem>
+        </MenuItems>
       </HeaderContainer>
     )}
   </User>
