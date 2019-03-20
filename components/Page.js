@@ -1,56 +1,30 @@
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
-import Meta from './Meta';
 
-const theme = {
-  red: '#FF0000',
-  black: '#393939',
-  grey: '#3A3A3A',
-  lightGrey: '#E1E1E1',
-  darkGrey: '#333',
-  offWhite: '#EDEDED',
-  maxWidth: '1000px',
-  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
-};
-
-const GlobalStyling = createGlobalStyle`
-  html {
-    box-sizing: border-box;
-    font-size: 14px;
-    font-family: Arial;
+const styles = theme => ({
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
   }
+})
 
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    padding: 0;
-    margin: 0;
-  }
-`;
-
-const StyledPage = styled.div`
-  color: ${props => props.theme.black};
-`;
-
-const Inner = styled.div`
-  max-width: ${props => props.theme.maxWidth};
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const Page = (props) => (
-  <ThemeProvider theme={theme}>
-    <StyledPage>
-      <GlobalStyling />
-      <Meta />
-      <Inner>
-        <Header />
-        {props.children}
-      </Inner>
-    </StyledPage>
-  </ThemeProvider>
+const Page = ({ classes, children }) => (
+  <Grid container spacing={24} className={classes.layout}>
+    <Grid item xs={12}>
+      <Header />
+    </Grid>
+    <Grid item xs={12}>
+      {children}
+    </Grid>
+  </Grid>
 )
 
-export default Page;
+export default withStyles(styles)(Page);

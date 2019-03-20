@@ -7,9 +7,10 @@ import LoginForm from '../components/Login'
 import User from '../components/User'
 
 const styles = theme => ({
-  gridItem: {
-    height: '100%'
-  },
+  paper: {
+    height: '100%',
+    padding: theme.spacing.unit * 3
+  }
 });
 
 const Index = ({ classes }) => (
@@ -22,12 +23,12 @@ const Index = ({ classes }) => (
         {!me && (
           <>
             <Grid item xs={12} sm={6}>
-              <Paper className={classes.gridItem}>
+              <Paper className={classes.paper}>
                 <SignupForm />
               </Paper>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Paper className={classes.gridItem}>
+              <Paper className={classes.paper}>
                 <LoginForm />
               </Paper>
             </Grid>

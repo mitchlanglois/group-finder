@@ -1,10 +1,17 @@
-import Link from 'next/link'
 import Router from 'next/router'
 import NProgress from 'nprogress'
-import styled from 'styled-components'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import Logout from './Logout'
 import User from './User'
+
+const styles = (theme) => ({
+})
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -16,60 +23,25 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 }
 
-const HeaderContainer = styled.div`
-  border-bottom: 1px solid ${props => props.theme.darkGrey};
-  margin-bottom: 10px;
-  a {
-    text-decoration: none;
-    color: ${props => props.theme.darkGrey};
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0px 5px;
-  }
-`;
-
-const Logo = styled.span`
-  font-size: 2rem;
-  margin-right: 16px;
-  a {
-    padding: 0;
-  }
-`;
-
-const MenuItems = styled.div`
-  float: right;
-`;
-
-const MenuItem = styled.div`
-  cursor: pointer;
-  font-weight: bold;
-
-  &:hover {
-    color: #666;
-  }
-`;
-
-const Header = () => (
+const Header = ({ classes }) => (
   <User>
     {({ data: { me } }) => (
-      <HeaderContainer>
-        <Logo>
-          <Link href="/">
-            <a>Group Finder</a>
-          </Link>
-        </Logo>
-        <MenuItems>
-          <MenuItem>
-            {me &&
+      <AppBar position="sticky">
+        <Toolbar>
+          <Typography color="inherit" variant="h5">
+            Group Finder
+          </Typography>
+          {me &&
+            <Button color="inherit">
               <Logout>
                 Logout
             </Logout>
-            }
-          </MenuItem>
-        </MenuItems>
-      </HeaderContainer>
+            </Button>
+          }
+        </Toolbar>
+      </AppBar>
     )}
   </User>
 )
 
-export default Header
+export default withStyles(styles)(Header)
