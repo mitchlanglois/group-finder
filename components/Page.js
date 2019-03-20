@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
@@ -17,14 +18,19 @@ const styles = theme => ({
 })
 
 const Page = ({ classes, children }) => (
-  <Grid container spacing={24} className={classes.layout}>
-    <Grid item xs={12}>
-      <Header />
+  <>
+    <Head>
+      <title>Group Finder</title>
+    </Head>
+    <Grid container spacing={24} className={classes.layout}>
+      <Grid item xs={12}>
+        <Header />
+      </Grid>
+      <Grid item xs={12}>
+        {children}
+      </Grid>
     </Grid>
-    <Grid item xs={12}>
-      {children}
-    </Grid>
-  </Grid>
+  </>
 )
 
 export default withStyles(styles)(Page);

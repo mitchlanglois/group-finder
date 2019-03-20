@@ -11,6 +11,9 @@ import Logout from './Logout'
 import User from './User'
 
 const styles = (theme) => ({
+  title: {
+    flexGrow: 1
+  }
 })
 
 Router.onRouteChangeStart = () => {
@@ -28,11 +31,11 @@ const Header = ({ classes }) => (
     {({ data: { me } }) => (
       <AppBar position="sticky">
         <Toolbar>
-          <Typography color="inherit" variant="h5">
+          <Typography color="inherit" variant="h5" className={classes.title}>
             Group Finder
           </Typography>
           {me &&
-            <Button color="inherit">
+            <Button color="inherit" variant="outlined">
               <Logout>
                 Logout
             </Logout>

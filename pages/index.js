@@ -18,7 +18,18 @@ const Index = ({ classes }) => (
     {({ data: { me } }) => (
       <Grid container spacing={24} alignItems="stretch">
         {me && (
-          <p>{me.name}</p>
+          <>
+            <Grid item xs={12} sm={4}>
+              <Paper className={classes.paper}>
+                <p>{me.name}</p>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <Paper className={classes.paper}>
+                <p>{me.name}</p>
+              </Paper>
+            </Grid>
+          </>
         )}
         {!me && (
           <>
