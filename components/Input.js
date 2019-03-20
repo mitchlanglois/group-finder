@@ -1,7 +1,12 @@
 const Input = (props) => (
   <label htmlFor={props.name}>
     {props.label || capitalize(props.name)}
-    <input {...props} />
+    <input
+      type={props.type || "text"}
+      name={props.name}
+      value={props.value}
+      onChange={props.onChange}
+    />
   </label>
 )
 

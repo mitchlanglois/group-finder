@@ -1,28 +1,13 @@
-import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
-import styled from 'styled-components'
 
 import { LOGIN_MUTATION } from '../lib/mutations'
 import { CURRENT_USER_QUERY } from '../lib/queries'
+import { useFormInput } from '../lib/customHooks'
 
 import Error from './Error'
 import Input from './Input'
-
-const Form = styled.form`
-  border: 1px solid red;
-  padding: 20px;
-  fieldset {
-    border: none;
-  }
-  label {
-    display: block;
-    margin-bottom: 10px;
-    input {
-      display: block;
-    }
-  }
-`;
-
+import Form from './Form'
+import Button from './Button'
 
 const Login = () => {
   const email = useFormInput('')
@@ -30,10 +15,8 @@ const Login = () => {
 
   const submitForm = async (e, login) => {
     e.preventDefault()
-    const response = await login()
-    console.log(response)
-    email.reset()
-    password.reset()
+    await login()
+    resetForm()
   }
 
   const resetForm = () => {
@@ -55,27 +38,14 @@ const Login = () => {
               <Error error={error} />
               <Input type="email" name="email" label="Email" {...email} />
               <Input type="password" name="password" label="Password" {...password} />
-              <button type="submit">Login!</button>
-              <button type="button" onClick={resetForm}>Reset</button>
+              <Button type="submit">Login!</Button>
+              <Button onClick={resetForm}>Reset</Button>
             </fieldset>
           </Form>
         )
       }}
     </Mutation>
   )
-}
-
-const useFormInput = (initialValue) => {
-  const [value, setValue] = useState(initialValue)
-
-  const handleChange = (e) => setValue(e.target.value)
-  const reset = () => setValue(initialValue)
-
-  return {
-    value,
-    onChange: handleChange,
-    reset
-  }
 }
 
 export default Login
