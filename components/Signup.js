@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import styled from 'styled-components'
 
+import { SIGNUP_MUTATION } from '../lib/mutations'
 import Error from '../components/Error'
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
-    signup(email: $email, name: $name, password: $password) {
-      user {
-        id
-      }
+const Form = styled.form`
+  border: 1px solid red;
+  padding: 20px;
+  fieldset {
+    border: none;
+  }
+  label {
+    display: block;
+    margin-bottom: 10px;
+    input {
+      display: block;
     }
   }
-`
+`;
 
 class Signup extends Component {
   state = {
@@ -23,17 +29,22 @@ class Signup extends Component {
   saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
+  submitForm = async (e, signup) => {
+    e.preventDefault()
+    const response = await signup()
+    console.log(response)
+    this.setState({
+      name: '',
+      email: '',
+      password: ''
+    })
+  }
   render() {
     return (
       <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
         {(signup, { error, loading }) => {
           return (
-            <form method="post" onSubmit={async (e) => {
-              e.preventDefault()
-              const response = await signup()
-              console.log(response)
-              this.setState({ name: '', email: '', password: '' })
-            }}>
+            <Form method="post" onSubmit={e => this.submitForm(e, signup)}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Sign up for an account</h2>
                 <Error error={error} />
@@ -51,7 +62,7 @@ class Signup extends Component {
                 </label>
                 <button type="submit">Sign Up!</button>
               </fieldset>
-            </form>
+            </Form>
           )
         }}
       </Mutation>

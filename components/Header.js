@@ -3,6 +3,7 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import styled from 'styled-components'
 
+import Logout from './Logout'
 import User from './User'
 
 Router.onRouteChangeStart = () => {
@@ -17,6 +18,7 @@ Router.onRouteChangeError = () => {
 
 const HeaderContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.darkGrey};
+  margin-bottom: 10px;
   a {
     text-decoration: none;
     color: ${props => props.theme.darkGrey};
@@ -35,25 +37,23 @@ const Logo = styled.span`
 `;
 
 const Header = () => (
-  <HeaderContainer>
-    <Logo>
-      <Link href="/">
-        <a>Group Finder</a>
-      </Link>
-    </Logo>
-    <Link href="/about">
-      <a>About</a>
-    </Link>
-    <Link href="/signup">
-      <a>Signup</a>
-    </Link>
-    <User>
-      {({ data: { me } }) => {
-        if (me) return <p>{me.name}</p>
-        return null
-      }}
-    </User>
-  </HeaderContainer>
+  <User>
+    {({ data: { me } }) => (
+      <HeaderContainer>
+        <Logo>
+          <Link href="/">
+            <a>Group Finder</a>
+          </Link>
+        </Logo>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+        {me &&
+          <Logout />
+        }
+      </HeaderContainer>
+    )}
+  </User>
 )
 
 export default Header

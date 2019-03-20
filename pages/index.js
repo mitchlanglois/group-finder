@@ -1,28 +1,27 @@
-import Link from 'next/link'
+import styled from 'styled-components'
+import SignupForm from '../components/Signup'
+import LoginForm from '../components/Login'
+import User from '../components/User'
 
-const getPosts = () => {
-  return [
-    { id: 'hello-nextjs', title: 'Hello Next.js' },
-    { id: 'learn-nextjs', title: 'Learn Next.js is awesome' },
-    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT' },
-  ]
-}
-
-const PostLink = ({ post }) => (
-  <li>
-    <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-      <a>{post.title}</a>
-    </Link>
-  </li>
-)
-
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+`
 export default () => (
-  <div>
-    <h1>Sample Blog</h1>
-    <ul>
-      {getPosts().map((post) => (
-        <PostLink key={post.id} post={post} />
-      ))}
-    </ul>
-  </div>
+  <User>
+    {({ data: { me } }) => (
+      <Grid>
+        {me && (
+          <p>{me.name}</p>
+        )}
+        {!me && (
+          <>
+            <SignupForm />
+            <LoginForm />
+          </>
+        )}
+      </Grid>
+    )}
+  </User>
 )
