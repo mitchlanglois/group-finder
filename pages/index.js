@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import SignupForm from '../components/Signup'
@@ -21,12 +22,12 @@ const Index = ({ classes }) => (
           <>
             <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
-                <p>{me.name}</p>
+                <Typography variant="title">{me.name}</Typography>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
               <Paper className={classes.paper}>
-                <p>{me.name}</p>
+                <Typography>Results:</Typography>
               </Paper>
             </Grid>
           </>
