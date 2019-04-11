@@ -22,7 +22,7 @@ const Index = ({ classes }) => (
           <>
             <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
-                <Typography variant="title">{me.name}</Typography>
+                <Typography variant="h6">{me.name}</Typography>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
